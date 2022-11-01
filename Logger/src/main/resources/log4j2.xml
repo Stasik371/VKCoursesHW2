@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="DEBUG">
-<Appenders>
-    <Console name="LogToConsole" target="STDOUT">
-        <PatternLayout pattern="N = %m%n"/>
-    </Console>
-    <File name="LogToFile" fileName="logs/logs.log">
-        <PatternLayout pattern="N = %m%n"/>
-    </File>
-</Appenders>
+    <Appenders>
+        <Console name="LogToConsole" target="STDOUT">
+            <PatternLayout pattern="N = %m%n"/>
+        </Console>
+        <File name="LogToFile" fileName="logs/logs.log">
+            <PatternLayout pattern="N = %m%n"/>
+        </File>
+    </Appenders>
 
-<Loggers>
-    <Logger name="org.loggers.ConsoleLogger" level="debug" additivity="false">
-        <AppenderRef ref="LogToConsole"/>
-    </Logger>
-    <Logger name="org.loggers.FileLogger" level="debug" additivity="false">
-        <AppenderRef ref="LogToFile"/>
-    </Logger>
-</Loggers>
+    <Loggers>
+        <Logger name="org.loggers.ConsoleLogger" level="debug" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="org.loggers.FileLogger" level="debug" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+        </Logger>
+    </Loggers>
 </Configuration>
