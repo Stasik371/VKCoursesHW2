@@ -1,8 +1,8 @@
 package org.loggers;
 
-import org.Application;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+
 
 public class ConsoleAndFileLogger implements AbstractLogger {
     private final Logger consoleLogger;
@@ -17,7 +17,7 @@ public class ConsoleAndFileLogger implements AbstractLogger {
 
     @Override
     public void log(@NotNull String message) {
-        fileLogger.info("{} {}",LogsCounter.amount++, new TagCreator().tagCreator(message,tag));
         consoleLogger.info("{} {}", LogsCounter.amount++, message);
+        fileLogger.info("{} {}", LogsCounter.amount++, TagCreator.creatingTagForFileLogging(message, tag));
     }
 }

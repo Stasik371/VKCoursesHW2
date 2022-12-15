@@ -15,21 +15,23 @@ public final class InjectionModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        if(args[0].equals("console")){
-            bind(org.loggers.AbstractLogger.class).toInstance(new org.loggers.ConsoleLogger
-                    (LoggerFactory.getLogger(org.loggers.ConsoleLogger.class)));
-        }
-        else if(args[0].equals("file")){
-            bind(org.loggers.AbstractLogger.class).toInstance(new org.loggers.FileLogger
-                    (LoggerFactory.getLogger(FileLogger.class), args[1]));
-        }
-        else if(args[0].equals("both")){
-            bind(org.loggers.AbstractLogger.class).toInstance(new ConsoleAndFileLogger(
-                    LoggerFactory.getLogger(org.loggers.ConsoleLogger.class),
-                    LoggerFactory.getLogger(org.loggers.FileLogger.class), args[1]));
-        }
-        else{
-            throw new IllegalArgumentException("Incorrect parameters");
+        LoggerCase loggerCase = LoggerCase.fromValue(args[0]);
+        switch (loggerCase) {
+            case CONSOLE:
+                bind(AbstractLogger.class).toInstance(new ConsoleLogger
+                        (LoggerFactory.getLogger(ConsoleLogger.class)));
+                break;
+            case FILE:
+                bind(AbstractLogger.class).toInstance(new FileLogger
+                        (LoggerFactory.getLogger(FileLogger.class), args[1]));
+                break;
+            case BOTH:
+                bind(AbstractLogger.class).toInstance(new ConsoleAndFileLogger(
+                        LoggerFactory.getLogger(ConsoleLogger.class),
+                        LoggerFactory.getLogger(FileLogger.class), args[1]));
+                break;
+            case NOT_FOUND:
+                throw new IllegalArgumentException("Incorrect parameters");
         }
     }
 }
